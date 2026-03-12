@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Ndalama — Expense Tracker</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="appRoot">
+
+  <!-- ═══ SPLASH ═══ -->
+  <div class="screen active" id="screenSplash">
+    <div class="splash-bg"></div>
+    <div class="splash-content">
+      <div class="splash-icon">💰</div>
+      <h1 class="splash-title">Ndalama</h1>
+      <p class="splash-sub">Smart Expense Tracking</p>
+      <div class="splash-loader"><div class="splash-bar"></div></div>
+    </div>
+  </div>
+
+  <!-- ═══ LOGIN ═══ -->
+  <div class="screen" id="screenLogin">
+    <div class="auth-top-wave"></div>
+    <div class="auth-container">
+      <div class="auth-brand">
+        <span class="brand-icon">💰</span>
+        <span class="brand-name">Ndalama</span>
+      </div>
+      <h2 class="auth-title">Welcome Back</h2>
+      <p class="auth-sub">Sign in to continue tracking</p>
+
+      <div class="form-grp">
+        <label>Email Address</label>
+        <div class="inp-wrap">
+          <span class="inp-ico">✉️</span>
+          <input type="email" id="loginEmail" placeholder="your@email.com">
+        </div>
+      </div>
+      <div class="form-grp">
+        <label>Password</label>
+        <div class="inp-wrap">
+          <span class="inp-ico">🔒</span>
+          <input type="password" id="loginPassword" placeholder="Your password">
+          <button class="pw-toggle" onclick="togglePw('loginPassword',this)">👁</button>
+        </div>
+      </div>
+      <div style="text-align:right;margin-bottom:1.2rem;">
+        <a class="link-btn" onclick="showScreen('screenForgot')">Forgot Password?</a>
+      </div>
+
+      <button class="btn-primary" onclick="handleLogin()">SIGN IN</button>
+      <div class="or-div"><span>OR</span></div>
+      <button class="btn-google" onclick="handleGoogleLogin()">
+        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="18" alt="G"> Continue with Google
+      </button>
+      <p class="auth-foot">Don't have an account? <a class="link-btn" onclick="showScreen('screenSignup1')">Sign Up</a></p>
+    </div>
+  </div>
+
+  <!-- ═══ FORGOT PASSWORD ═══ -->
+  <div class="screen" id="screenForgot">
+    <div class="auth-top-wave"></div>
+    <div class="auth-container">
+      <button class="back-btn" onclick="showScreen('screenLogin')">← Back</button>
+      <div class="auth-brand"><span class="brand-icon">💰</span><span class="brand-name">Ndalama</span></div>
+      <h2 class="auth-title">Reset Password</h2>
+      <p class="auth-sub">We'll send a reset link to your email</p>
+      <div class="form-grp">
+        <label>Email Address</label>
+        <div class="inp-wrap">
+          <span class="inp-ico">✉️</span>
+          <input type="email" id="forgotEmail" placeholder="your@email.com">
+        </div>
+      </div>
+      <button class="btn-primary" onclick="handleForgotPassword()">SEND RESET LINK</button>
+      <p class="auth-foot">Remember it? <a class="link-btn" onclick="showScreen('screenLogin')">Sign In</a></p>
+    </div>
+  </div>
+
+  <!-- ═══ SIGN UP STEP 1 ═══ -->
+  <div class="screen" id="screenSignup1">
+    <div class="auth-top-wave"></div>
+    <div class="auth-container">
+      <button class="back-btn" onclick="showScreen('screenLogin')">← Back</button>
+      <div class="step-row">
+        <div class="step-dot active">1</div>
+        <div class="step-line"></div>
+        <div class="step-dot">2</div>
+      </div>
+      <h2 class="auth-title">Create Account</h2>
+      <p class="auth-sub">Step 1 of 2 — Set your credentials</p>
+
+      <div class="form-grp">
+        <label>Email Address</label>
+        <div class="inp-wrap">
+          <span class="inp-ico">✉️</span>
+          <input type="email" id="su1Email" placeholder="your@email.com">
+        </div>
+      </div>
+      <div class="form-grp">
+        <label>Password</label>
+        <div class="inp-wrap">
+          <span class="inp-ico">🔒</span>
+          <input type="password" id="su1Password" placeholder="Create strong password" oninput="checkStrength(this.value)">
+          <button class="pw-toggle" onclick="togglePw('su1Password',this)">👁</button>
+        </div>
+        <div class="strength-track"><div class="strength-fill" id="strengthFill"></div></div>
+        <p class="strength-txt" id="strengthTxt"></p>
+        <ul class="pw-rules" id="pwRules">
+          <li id="r-len">At least 8 characters</li>
+          <li id="r-up">One uppercase letter (A–Z)</li>
+          <li id="r-lo">One lowercase letter (a–z)</li>
+          <li id="r-num">One number (0–9)</li>
+          <li id="r-sym">One special character (!@#$%...)</li>
+        </ul>
+      </div>
+      <div class="form-grp">
+        <label>Confirm Password</label>
+        <div class="inp-wrap">
+          <span class="inp-ico">🔒</span>
+          <input type="password" id="su1Confirm" placeholder="Re-enter your password">
+          <button class="pw-toggle" onclick="togglePw('su1Confirm',this)">👁</button>
+        </div>
+      </div>
+
+      <button class="btn-primary" onclick="handleSignup1()">CONTINUE →</button>
+      <div class="or-div"><span>OR</span></div>
+      <button class="btn-google" onclick="handleGoogleLogin()">
+        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="18" alt="G"> Continue with Google
+      </button>
+      <p class="auth-foot">Already have an account? <a class="link-btn" onclick="showScreen('screenLogin')">Login</a></p>
+    </div>
+  </div>
+
+  <!-- ═══ SIGN UP STEP 2 ═══ -->
+  <div class="screen" id="screenSignup2">
+    <div class="auth-container" style="padding-top:1.5rem;padding-bottom:3rem;">
+      <div class="step-row">
+        <div class="step-dot done">✓</div>
+        <div class="step-line done"></div>
+        <div class="step-dot active">2</div>
+      </div>
+      <h2 class="auth-title">Personal Details</h2>
+      <p class="auth-sub">Step 2 of 2 — Almost there!</p>
+
+      <!-- Profile Photo -->
+      <div class="photo-zone" onclick="document.getElementById('photoFileInput').click()">
+        <div class="photo-circle" id="photoCircle">
+          <span id="photoPlaceholder">📷<br><small>Add Photo<br>(optional)</small></span>
+          <img id="photoPreviewImg" src="" alt="" style="display:none;width:100%;height:100%;object-fit:cover;border-radius:50%;">
+        </div>
+      </div>
+      <input type="file" id="photoFileInput" accept="image/*" style="display:none" onchange="previewPhoto(this)">
+
+      <div class="form-grp">
+        <label>Full Name</label>
+        <div class="inp-wrap">
+          <span class="inp-ico">👤</span>
+          <input type="text" id="su2Name" placeholder="e.g. Maureen Jambo">
+        </div>
+      </div>
+      <div class="form-grp">
+        <label>Nickname <span class="lbl-note">(displayed in app)</span></label>
+        <div class="inp-wrap">
+          <span class="inp-ico">😊</span>
+          <input type="text" id="su2Nick" placeholder="e.g. Mauri">
+        </div>
+      </div>
+      <div class="form-grp">
+        <label>Phone Number</label>
+        <div class="inp-wrap">
+          <span class="inp-ico">📱</span>
+          <input type="tel" id="su2Phone" placeholder="+265 888 000 000">
+        </div>
+      </div>
+      <div class="form-grp">
+        <label>Date of Birth</label>
+        <div class="inp-wrap">
+          <span class="inp-ico">🎂</span>
+          <input type="date" id="su2DOB">
+        </div>
+      </div>
+      <div class="form-grp">
+        <label>Gender</label>
+        <div class="gender-row">
+          <button class="gender-btn active" id="gBtn-Male" onclick="pickGender('Male')">♂ Male</button>
+          <button class="gender-btn" id="gBtn-Female" onclick="pickGender('Female')">♀ Female</button>
+        </div>
+      </div>
+
+      <button class="btn-primary" onclick="handleSignup2()">CREATE MY ACCOUNT 🎉</button>
+    </div>
+  </div>
+
+  <!-- ═══ MAIN APP ═══ -->
+  <div class="screen" id="screenApp">
+
+    <!-- TOP BAR -->
+    <header class="topbar">
+      <div class="tb-left" onclick="showView('viewProfile')">
+        <div class="tb-avatar-wrap">
+          <img id="tbAvatar" src="" alt="" class="tb-avatar" style="display:none">
+          <div id="tbAvatarFb" class="tb-avatar-fb">👤</div>
+        </div>
+        <div>
+          <div class="tb-greeting" id="tbGreeting">Hi there!</div>
+          <div class="tb-date" id="tbDate"></div>
+        </div>
+      </div>
+      <button class="tb-notif" id="notifBtn" onclick="openReminderModal()">🔔</button>
+    </header>
+
+    <!-- SCROLLABLE VIEWS -->
+    <div class="views-wrap">
+
+      <!-- HOME -->
+      <div class="view active" id="viewHome">
+        <div class="hero-card">
+          <div class="hero-lbl">Total Spent This Month</div>
+          <div class="hero-amt" id="heroAmt">MK 0<span class="hero-dec">.00</span></div>
+          <div class="budget-block">
+            <div class="budget-row">
+              <span>Monthly Budget</span>
+              <span id="budgetPct">—</span>
+            </div>
+            <div class="budget-track"><div class="budget-fill" id="budgetFill" style="width:0%"></div></div>
+            <div class="budget-row" style="margin-top:0.3rem;">
+              <span id="budgetSpentLbl" style="font-size:0.8rem;opacity:0.85;">Set a budget to track progress</span>
+              <a class="budget-set-link" onclick="openBudgetModal()">✏️ Set Budget</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="stat-row">
+          <div class="s-card"><div class="s-ico">📅</div><div class="s-val" id="sToday">MK 0</div><div class="s-lbl">Today</div></div>
+          <div class="s-card"><div class="s-ico">📊</div><div class="s-val" id="sWeek">MK 0</div><div class="s-lbl">This Week</div></div>
+          <div class="s-card"><div class="s-ico">📆</div><div class="s-val" id="sMonth">MK 0</div><div class="s-lbl">Month</div></div>
+        </div>
+
+        <div class="sec-hdr"><span>Recent Transactions</span><a class="see-all" onclick="showView('viewHistory')">See All</a></div>
+        <div id="recentList"></div>
+      </div>
+
+      <!-- ANALYSIS -->
+      <div class="view" id="viewAnalysis">
+        <div class="view-hdr">
+          <h2>Spending Analysis</h2>
+          <div class="p-tabs">
+            <button class="p-tab active" onclick="setPeriod('week',this)">Week</button>
+            <button class="p-tab" onclick="setPeriod('month',this)">Month</button>
+          </div>
+        </div>
+        <div class="chart-card" id="chartCard">
+          <div class="bar-chart" id="barChart"></div>
+          <div class="bar-labels" id="barLabels"></div>
+        </div>
+        <div class="sec-hdr" style="margin-top:1.2rem;"><span>Top Categories</span></div>
+        <div id="topCats"></div>
+        <button class="btn-pdf" onclick="openMonthPicker()">⬇ Download Monthly Report</button>
+      </div>
+
+      <!-- HISTORY -->
+      <div class="view" id="viewHistory">
+        <div class="view-hdr">
+          <h2>All Expenses</h2>
+          <input type="date" id="histFilter" class="hist-filter" onchange="renderHistory()">
+        </div>
+        <div id="historyList"></div>
+      </div>
+
+      <!-- PROFILE -->
+      <div class="view" id="viewProfile">
+        <div class="profile-hero">
+          <div class="prof-ava-wrap">
+            <img id="profAvatar" src="" alt="" style="display:none">
+            <div id="profAvaFb" class="prof-ava-fb">👤</div>
+            <button class="change-photo" onclick="document.getElementById('profPhotoInput').click()">📷</button>
+            <input type="file" id="profPhotoInput" accept="image/*" style="display:none" onchange="updateProfilePhoto(this)">
+          </div>
+          <h2 id="profName">—</h2>
+          <p id="profEmail" class="prof-email">—</p>
+        </div>
+
+        <div class="prof-section">
+          <div class="prof-sec-title">Personal Information</div>
+          <div class="prof-row" onclick="editProfileField('nickname','Nickname')">
+            <span class="pr-ico">😊</span><div class="pr-info"><div class="pr-lbl">Nickname</div><div class="pr-val" id="pr-nickname">—</div></div><span class="pr-arr">›</span>
+          </div>
+          <div class="prof-row" onclick="editProfileField('phone','Phone Number')">
+            <span class="pr-ico">📱</span><div class="pr-info"><div class="pr-lbl">Phone</div><div class="pr-val" id="pr-phone">—</div></div><span class="pr-arr">›</span>
+          </div>
+          <div class="prof-row">
+            <span class="pr-ico">🎂</span><div class="pr-info"><div class="pr-lbl">Date of Birth</div><div class="pr-val" id="pr-dob">—</div></div>
+          </div>
+          <div class="prof-row">
+            <span class="pr-ico">⚧</span><div class="pr-info"><div class="pr-lbl">Gender</div><div class="pr-val" id="pr-gender">—</div></div>
+          </div>
+        </div>
+
+        <div class="prof-section">
+          <div class="prof-sec-title">Preferences</div>
+          <div class="prof-row" onclick="openReminderModal()">
+            <span class="pr-ico">🔔</span><div class="pr-info"><div class="pr-lbl">Daily Reminder</div><div class="pr-val" id="pr-reminder">Not set</div></div><span class="pr-arr">›</span>
+          </div>
+          <div class="prof-row" onclick="openBudgetModal()">
+            <span class="pr-ico">💰</span><div class="pr-info"><div class="pr-lbl">Monthly Budget</div><div class="pr-val" id="pr-budget">Not set</div></div><span class="pr-arr">›</span>
+          </div>
+        </div>
+
+        <div class="prof-section">
+          <div class="prof-sec-title">Account</div>
+          <div class="prof-row" onclick="handleChangePassword()">
+            <span class="pr-ico">🔑</span><div class="pr-info"><div class="pr-lbl">Change Password</div><div class="pr-val">Send reset link to email</div></div><span class="pr-arr">›</span>
+          </div>
+          <div class="prof-row danger" onclick="handleLogout()">
+            <span class="pr-ico">🚪</span><div class="pr-info"><div class="pr-lbl" style="color:#e53e3e;">Sign Out</div></div><span class="pr-arr">›</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /views-wrap -->
+
+    <!-- FAB -->
+    <button class="fab" onclick="openAddModal()">+</button>
+
+    <!-- BOTTOM NAV -->
+    <nav class="bot-nav">
+      <button class="bn-btn active" id="bn-home" onclick="showView('viewHome',this)"><span>🏠</span><small>Home</small></button>
+      <button class="bn-btn" id="bn-analysis" onclick="showView('viewAnalysis',this)"><span>📊</span><small>Analysis</small></button>
+      <div class="bn-spacer"></div>
+      <button class="bn-btn" id="bn-history" onclick="showView('viewHistory',this)"><span>📋</span><small>History</small></button>
+      <button class="bn-btn" id="bn-profile" onclick="showView('viewProfile',this)"><span>👤</span><small>Profile</small></button>
+    </nav>
+
+  </div><!-- /screenApp -->
+
+</div><!-- /appRoot -->
+
+<!-- ═══ MODALS ═══ -->
+
+<!-- Add Expense -->
+<div class="modal-ov" id="addModal">
+  <div class="modal-sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-hdr"><h3>Add Expense</h3><button onclick="closeModal('addModal')">Cancel</button></div>
+    <div class="form-grp"><label>Date</label><input type="date" id="expDate" class="m-inp"></div>
+    <div class="form-grp"><label>Category</label>
+      <select id="expCat" class="m-inp">
+        <option value="Food & Groceries">🍽️ Food & Groceries</option>
+        <option value="Transport">🚌 Transport</option>
+        <option value="Housing & Rent">🏠 Housing & Rent</option>
+        <option value="Health & Medical">💊 Health & Medical</option>
+        <option value="Education">📚 Education</option>
+        <option value="Entertainment">🎬 Entertainment</option>
+        <option value="Clothing">👕 Clothing</option>
+        <option value="Utilities">💡 Utilities</option>
+        <option value="Other">📌 Other</option>
+      </select>
+    </div>
+    <div class="form-grp"><label>Description <small>(optional)</small></label><input type="text" id="expDesc" class="m-inp" placeholder="e.g. Lunch at Hungry Lion"></div>
+    <div class="form-grp"><label>Amount (MWK)</label>
+      <div class="amt-wrap"><span>MK</span><input type="number" id="expAmt" class="m-inp" placeholder="0.00" min="0" step="0.01"></div>
+    </div>
+    <button class="btn-primary" onclick="addExpense()">SAVE EXPENSE</button>
+  </div>
+</div>
+
+<!-- Edit Profile Field -->
+<div class="modal-ov" id="editFldModal">
+  <div class="modal-sheet" style="padding-bottom:2rem;">
+    <div class="sheet-handle"></div>
+    <div class="sheet-hdr"><h3 id="editFldTitle">Edit</h3><button onclick="closeModal('editFldModal')">Cancel</button></div>
+    <div class="form-grp"><input type="text" id="editFldInput" class="m-inp" placeholder=""></div>
+    <button class="btn-primary" onclick="saveProfileField()">SAVE</button>
+  </div>
+</div>
+
+<!-- Reminder -->
+<div class="modal-ov" id="reminderModal">
+  <div class="modal-sheet" style="padding-bottom:2rem;">
+    <div class="sheet-handle"></div>
+    <div class="sheet-hdr"><h3>🔔 Daily Reminder</h3><button onclick="closeModal('reminderModal')">Cancel</button></div>
+    <p class="modal-desc">Choose what time you want to be reminded to log your expenses.</p>
+    <div class="form-grp"><label>Reminder Time</label><input type="time" id="reminderTime" class="m-inp" value="18:00"></div>
+    <div class="notif-status" id="notifStatus"></div>
+    <button class="btn-primary" onclick="saveReminder()">ENABLE REMINDER</button>
+  </div>
+</div>
+
+<!-- Budget -->
+<div class="modal-ov" id="budgetModal">
+  <div class="modal-sheet" style="padding-bottom:2rem;">
+    <div class="sheet-handle"></div>
+    <div class="sheet-hdr"><h3>💰 Monthly Budget</h3><button onclick="closeModal('budgetModal')">Cancel</button></div>
+    <div class="form-grp"><label>Budget Amount (MWK)</label>
+      <div class="amt-wrap"><span>MK</span><input type="number" id="budgetAmt" class="m-inp" placeholder="e.g. 200000" min="0"></div>
+    </div>
+    <button class="btn-primary" onclick="saveBudget()">SAVE BUDGET</button>
+  </div>
+</div>
+
+<!-- Month Picker for PDF -->
+<div class="modal-ov" id="monthModal">
+  <div class="modal-sheet" style="padding-bottom:2rem;">
+    <div class="sheet-handle"></div>
+    <div class="sheet-hdr"><h3>📄 Monthly Report</h3><button onclick="closeModal('monthModal')">Cancel</button></div>
+    <div class="form-grp"><label>Select Month</label><input type="month" id="reportMonth" class="m-inp"></div>
+    <button class="btn-primary" onclick="generatePDF()">DOWNLOAD PDF</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
