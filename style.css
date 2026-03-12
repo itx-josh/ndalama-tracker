@@ -26,24 +26,46 @@ html, body {
   background: var(--light);
   color: var(--ink);
   height: 100%;
-  overflow: hidden;
+  /* No overflow:hidden on body — it blocks input fields on mobile */
 }
 
 /* ── SCREENS ─────────────────────────────────── */
-#appRoot { width:100%; height:100vh; position:relative; overflow:hidden; }
+#appRoot {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+}
 
 .screen {
-  position: absolute;
+  position: fixed;
   inset: 0;
   overflow-y: auto;
+  overflow-x: hidden;
   background: var(--white);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
   -webkit-overflow-scrolling: touch;
+  z-index: 1;
 }
 
-.screen.active { opacity: 1; pointer-events: all; }
+.screen.active {
+  opacity: 1;
+  pointer-events: all;
+  z-index: 2;
+}
+
+/* ── AUTH SCREEN LAYOUT ─────────────────────── */
+#screenLogin,
+#screenForgot,
+#screenSignup1 {
+  display: flex;
+  flex-direction: column;
+}
+
+#screenSignup2 {
+  display: block;
+}
 
 /* ── SPLASH ──────────────────────────────────── */
 .splash-bg {
@@ -89,25 +111,33 @@ html, body {
 /* ── AUTH SHARED ─────────────────────────────── */
 .auth-top-wave {
   width: 100%;
-  height: 200px;
   background: linear-gradient(135deg, #1BC9C9, #1a73e8);
-  border-radius: 0 0 50% 50% / 0 0 40px 40px;
-  position: relative;
+  border-radius: 0 0 28px 28px;
   flex-shrink: 0;
+  padding: 2.5rem 0 1.2rem;
+  /* Let content define the height naturally */
 }
 
 .auth-container {
-  padding: 1.5rem 1.8rem 3rem;
+  padding: 1.4rem 1.8rem 3rem;
   max-width: 480px;
   margin: 0 auto;
+}
+
+/* Brand logo inside the wave */
+.wave-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.8rem 1rem;
 }
 
 .auth-brand {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin-bottom: 1.5rem;
-  margin-top: -60px;
+  margin-bottom: 1.2rem;
+  padding-top: 1.5rem;
 }
 
 .brand-icon { font-size: 2rem; }
@@ -122,13 +152,14 @@ html, body {
 .back-btn {
   background: none;
   border: none;
-  color: var(--teal);
+  color: white;
   font-size: 0.9rem;
   font-weight: 700;
   cursor: pointer;
-  padding: 0.5rem 0;
-  margin-bottom: 1rem;
+  padding: 0.8rem 1.8rem;
   display: block;
+  text-align: left;
+  width: 100%;
 }
 
 /* ── STEP INDICATOR ──────────────────────────── */
@@ -386,6 +417,7 @@ html, body {
   display: flex;
   flex-direction: column;
   background: var(--light);
+  height: 100%;
 }
 
 /* Top Bar */
@@ -453,12 +485,15 @@ html, body {
   flex: 1;
   overflow: hidden;
   position: relative;
+  /* Ensure it takes remaining space above bottom nav */
+  min-height: 0;
 }
 
 .view {
   position: absolute;
   inset: 0;
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 1.2rem 1rem 100px;
   opacity: 0;
   pointer-events: none;
