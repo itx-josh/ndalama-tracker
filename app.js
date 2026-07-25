@@ -64,9 +64,9 @@ const CURRENCIES = [
 ];
 
 const ICONS = {
-  'Food & Groceries':'🍽️','Transport':'🚌','Housing & Rent':'🏠',
-  'Health & Medical':'💊','Education':'📚','Entertainment':'🎬',
-  'Clothing':'👕','Utilities':'💡','Other':'📌'
+  'Food & Groceries':'<i class="fi fi-sr-shopping-bag"></i>','Transport':'<i class="fi fi-sr-location-alt"></i>','Housing & Rent':'<i class="fi fi-sr-home"></i>',
+  'Health & Medical':'<i class="fi fi-sr-medicine"></i>','Education':'<i class="fi fi-sr-book"></i>','Entertainment':'<i class="fi fi-sr-play"></i>',
+  'Clothing':'<i class="fi fi-sr-label"></i>','Utilities':'<i class="fi fi-sr-bulb"></i>','Other':'<i class="fi fi-sr-square"></i>'
 };
 
 /* ═══════════════════════════════════════════════
@@ -132,7 +132,7 @@ async function handleForgotPassword() {
   if (!email) { toast('Please enter your email.'); return; }
   try {
     await sendPasswordResetEmail(auth, email);
-    toast('✉️ Reset link sent! Check your inbox.');
+    toast('Reset link sent! Check your inbox.');
     showScreen('screenLogin');
   } catch (e) { toast(friendlyError(e.code)); }
 }
@@ -163,10 +163,10 @@ async function handleSignup2() {
     await setDoc(doc(db, 'users', cred.user.uid), {
       fullName:name, nickname:nick, email, phone, dob, gender:selectedGender, photoURL
     });
-    toast('🎉 Account created! Welcome!');
+    toast('Account created! Welcome!');
   } catch (e) {
     toast(friendlyError(e.code));
-    btn.disabled = false; btn.textContent = 'CREATE MY ACCOUNT 🎉';
+    btn.disabled = false; btn.textContent = 'CREATE MY ACCOUNT';
   }
 }
 window.handleSignup2 = handleSignup2;
@@ -187,7 +187,7 @@ async function handleChangePassword() {
   if (!currentUser?.email) return;
   try {
     await sendPasswordResetEmail(auth, currentUser.email);
-    toast('✉️ Reset link sent to ' + currentUser.email);
+    toast('Reset link sent to ' + currentUser.email);
   } catch (e) { toast(friendlyError(e.code)); }
 }
 window.handleChangePassword = handleChangePassword;
@@ -209,7 +209,7 @@ function pickGender(g){selectedGender=g;document.getElementById('gBtn-Male').cla
 window.pickGender=pickGender;
 function previewPhoto(input){const file=input.files[0];if(!file)return;const reader=new FileReader();reader.onload=e=>{pendingPhotoB64=e.target.result;const img=document.getElementById('photoPreviewImg'),ph=document.getElementById('photoPlaceholder');img.src=pendingPhotoB64;img.style.display='block';if(ph)ph.style.display='none';};reader.readAsDataURL(file);}
 window.previewPhoto=previewPhoto;
-function togglePw(id,btn){const inp=document.getElementById(id);if(!inp)return;inp.type=inp.type==='password'?'text':'password';btn.textContent=inp.type==='password'?'👁':'🙈';}
+function togglePw(id,btn){const inp=document.getElementById(id);if(!inp)return;inp.type=inp.type==='password'?'text':'password';btn.innerHTML=inp.type==='password'?'<i class="fi fi-sr-eye"></i>':'<i class="fi fi-sr-eye-crossed"></i>';}
 window.togglePw=togglePw;
 
 /* ═══════════════════════════════════════════════
@@ -266,7 +266,7 @@ function updateProfileView() {
 
   const streak = calcStreak();
   const sEl    = document.getElementById('profStreak');
-  if (sEl) sEl.textContent = streak > 0 ? `🔥 ${streak}-day logging streak!` : '';
+  if (sEl) sEl.innerHTML = streak > 0 ? `<i class="fi fi-sr-flame"></i> ${streak}-day logging streak!` : '';
 
   updatePrefRows();
 }
@@ -302,7 +302,7 @@ async function saveProfileField() {
     await setDoc(doc(db,'users',currentUser.uid), userProfile);
     closeModal('editFldModal');
     updateTopbar(); updateProfileView();
-    toast('✓ Saved!');
+    toast('Saved!');
   } catch(e) { toast('Could not save. Check connection.'); }
 }
 window.saveProfileField = saveProfileField;
@@ -316,7 +316,7 @@ async function updateProfilePhoto(input) {
       userProfile.photoURL = await compressPhoto(e.target.result, 200);
       await setDoc(doc(db,'users',currentUser.uid), userProfile);
       updateTopbar(); updateProfileView();
-      toast('✓ Profile photo updated!');
+      toast('Profile photo updated!');
     } catch(err) { toast('Could not save photo.'); }
   };
   reader.readAsDataURL(file);
@@ -362,7 +362,7 @@ function selectCurrency(code) {
   updatePrefRows();
   renderHome();
   renderAnalysis();
-  toast(`✓ Currency set to ${currency.code}`);
+  toast(`Currency set to ${currency.code}`);
 }
 window.selectCurrency = selectCurrency;
 
@@ -382,7 +382,7 @@ function saveIncome() {
   localStorage.setItem('ndalama_income_'+(currentUser?.uid||''), val);
   closeModal('incomeModal');
   updatePrefRows(); renderHome();
-  toast('✓ Income saved — '+fmt(val));
+  toast('Income saved — '+fmt(val));
 }
 window.saveIncome = saveIncome;
 
@@ -399,7 +399,7 @@ function saveBudget() {
   localStorage.setItem('ndalama_budget_'+(currentUser?.uid||''), val);
   closeModal('budgetModal');
   updatePrefRows(); renderHome();
-  toast('✓ Budget set — '+fmt(val));
+  toast('Budget set — '+fmt(val));
 }
 window.saveBudget = saveBudget;
 
@@ -424,7 +424,7 @@ async function saveGoal() {
     document.getElementById('goalName').value    = '';
     document.getElementById('goalTarget').value  = '';
     document.getElementById('goalCurrent').value = '0';
-    toast('💎 Goal created!');
+    toast('Goal created!');
   } catch(e) { toast('Could not save goal.'); }
 }
 window.saveGoal = saveGoal;
@@ -454,10 +454,10 @@ async function contributeToGoal() {
     });
     closeModal('contributeModal');
     if (isCompleted) {
-      setText('congratsText', `You reached your "${goal.name}" goal of ${fmt(goal.target)}! 🎉`);
+      setText('congratsText', `You reached your "${goal.name}" goal of ${fmt(goal.target)}!`);
       openModal('congratsModal');
     } else {
-      toast(`✓ Added ${fmt(amt)} to ${goal.name}`);
+      toast(`Added ${fmt(amt)} to ${goal.name}`);
     }
   } catch(e) { toast('Could not update goal.'); }
 }
@@ -476,7 +476,7 @@ function renderGoals() {
   const el = document.getElementById('goalsList');
   if (!el) return;
   if (!goals.length) {
-    el.innerHTML = `<div class="empty-msg" style="padding:1rem;"><div class="em-ico">💎</div>No goals yet. Tap + New Goal to start saving!</div>`;
+    el.innerHTML = `<div class="empty-msg" style="padding:1rem;"><div class="em-ico"><i class="fi fi-sr-diamond"></i></div>No goals yet. Tap + New Goal to start saving!</div>`;
     return;
   }
   el.innerHTML = goals.map(g => {
@@ -494,7 +494,7 @@ function renderGoals() {
           ${g.completed
             ? `<span class="goal-complete-badge">✓ Completed!</span>`
             : `<button class="goal-btn" onclick="openContributeModal('${g.id}','${g.name.replace(/'/g,"\\'")}')">+ Add</button>`}
-          <button class="goal-btn danger" onclick="deleteGoal('${g.id}')">✕</button>
+          <button class="goal-btn danger" onclick="deleteGoal('${g.id}')"><i class="fi fi-sr-trash"></i></button>
         </div>
       </div>
     </div>`;
@@ -515,7 +515,7 @@ function startListeners() {
     renderHome(); renderAnalysis(); renderHistory();
     checkBudgetAlert();
     updateStreakBadge();
-  }, err => { console.error(err); toast('⚠️ Could not sync expenses.'); });
+  }, err => { console.error(err); toast('Could not sync expenses.'); });
 
   const goalQ = query(collection(db,'users',currentUser.uid,'goals'), orderBy('createdAt','asc'));
   goalUnsub = onSnapshot(goalQ, snap => {
@@ -572,18 +572,18 @@ async function saveExpense() {
       await updateDoc(doc(db,'users',currentUser.uid,'expenses',editId), {
         date, category:cat, description:desc, amount:amt
       });
-      toast('✓ Expense updated!');
+      toast('Expense updated!');
     } else {
       await addDoc(collection(db,'users',currentUser.uid,'expenses'), {
         date, category:cat, description:desc, amount:amt, createdAt:Date.now()
       });
       document.getElementById('expAmt').value  = '';
       document.getElementById('expDesc').value = '';
-      toast('✓ Expense saved — '+fmt(amt));
+      toast('Expense saved — '+fmt(amt));
     }
     closeModal('addModal');
   } catch(e) {
-    toast('⚠️ Failed to save. Check connection.');
+    toast('Failed to save. Check connection.');
   } finally {
     if (btn) { btn.disabled=false; btn.textContent=editId?'UPDATE EXPENSE':'SAVE EXPENSE'; }
   }
@@ -595,7 +595,7 @@ async function deleteExpense(id) {
   try {
     await deleteDoc(doc(db,'users',currentUser.uid,'expenses',id));
     toast('Expense removed.');
-  } catch(e) { toast('⚠️ Could not delete.'); }
+  } catch(e) { toast('Could not delete.'); }
 }
 window.deleteExpense = deleteExpense;
 
@@ -615,7 +615,7 @@ function renderHome() {
     heroEl.innerHTML = (monthlyIncome > 0 ? fmt(Math.max(balance,0)) : fmt(mAmt)) + '<span class="hero-dec">.00</span>';
   }
   const incEl = document.getElementById('heroIncome');
-  if (incEl) incEl.textContent = monthlyIncome > 0 ? fmt(monthlyIncome) : 'Set income ✏️';
+  if (incEl) incEl.textContent = monthlyIncome > 0 ? fmt(monthlyIncome) : 'Set income';
 
   // Hero label
   const heroLbl = document.querySelector('.hero-lbl');
@@ -666,7 +666,7 @@ function renderHome() {
   const el = document.getElementById('recentList');
   if (!el) return;
   el.innerHTML = recent.length ? recent.map(e=>txHTML(e)).join('')
-    : `<div class="empty-msg"><div class="em-ico">📭</div>No expenses yet. Tap + to add one.</div>`;
+    : `<div class="empty-msg"><div class="em-ico"><i class="fi fi-sr-inbox"></i></div>No expenses yet. Tap + to add one.</div>`;
 }
 
 /* ═══════════════════════════════════════════════
@@ -734,7 +734,7 @@ function renderAnalysis() {
       const prevName = new Date(prevY,prevM).toLocaleDateString('en-GB',{month:'long'});
       momCard.className = 'mom-card';
       momCard.innerHTML = `
-        <div class="mom-icon">${isUp?'📈':'📉'}</div>
+        <div class="mom-icon">${isUp?'<i class="fi fi-sr-caret-up"></i>':'<i class="fi fi-sr-caret-down"></i>'}</div>
         <div class="mom-info">
           <div class="mom-title">Month vs Last Month</div>
           <div class="mom-val">${fmt(curTotal)} this month</div>
@@ -778,12 +778,12 @@ function renderAnalysis() {
   if (topEl) {
     topEl.innerHTML = sorted.length ? sorted.map(([cat,amt])=>`
       <div class="top-cat-item">
-        <div class="tc-icon">${ICONS[cat]||'📌'}</div>
+        <div class="tc-icon">${ICONS[cat]||'<i class="fi fi-sr-square"></i>'}</div>
         <div class="tc-info"><div class="tc-name">${cat}</div><div class="tc-pct">${total?((amt/total)*100).toFixed(0):0}% of total</div></div>
         <div class="tc-bar-wrap"><div class="tc-bar-track"><div class="tc-bar-fill" style="width:${total?(amt/total*100).toFixed(1):0}%"></div></div></div>
         <div class="tc-amt">${fmt(amt)}</div>
       </div>`).join('')
-    : `<div class="empty-msg"><div class="em-ico">📊</div>No data for this period.</div>`;
+    : `<div class="empty-msg"><div class="em-ico"><i class="fi fi-sr-stats"></i></div>No data for this period.</div>`;
   }
 }
 
@@ -817,7 +817,7 @@ function renderHistory() {
   const el = document.getElementById('historyList');
   if (!el) return;
   if (!data.length) {
-    el.innerHTML = `<div class="empty-msg"><div class="em-ico">🔍</div>${search?'No results for "'+search+'"':'No expenses found.'}</div>`;
+    el.innerHTML = `<div class="empty-msg"><div class="em-ico"><i class="fi fi-sr-search"></i></div>${search?'No results for "'+search+'"':'No expenses found.'}</div>`;
     return;
   }
 
@@ -848,7 +848,7 @@ window.clearSearch = clearSearch;
 function txHTML(e) {
   return `
     <div class="tx-item">
-      <div class="tx-icon">${ICONS[e.category]||'📌'}</div>
+      <div class="tx-icon">${ICONS[e.category]||'<i class="fi fi-sr-square"></i>'}</div>
       <div class="tx-info">
         <div class="tx-cat">${e.category}</div>
         ${e.description?`<div class="tx-desc">${e.description}</div>`:''}
@@ -856,8 +856,8 @@ function txHTML(e) {
       </div>
       <div class="tx-right"><div class="tx-amt">−${fmt(e.amount)}</div></div>
       <div class="tx-actions">
-        <button class="tx-btn" onclick="openEditModal('${e.id}')" title="Edit">✏️</button>
-        <button class="tx-btn del" onclick="deleteExpense('${e.id}')" title="Delete">✕</button>
+        <button class="tx-btn" onclick="openEditModal('${e.id}')" title="Edit"><i class="fi fi-sr-pencil"></i></button>
+        <button class="tx-btn del" onclick="deleteExpense('${e.id}')" title="Delete"><i class="fi fi-sr-trash"></i></button>
       </div>
     </div>`;
 }
@@ -894,7 +894,8 @@ function openMonthPicker(type) {
   exportType = type;
   const now  = new Date();
   document.getElementById('reportMonth').value = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;
-  setText('monthModalTitle', type==='csv' ? '📊 Export CSV' : '📄 Monthly Report');
+  const mmTitle = document.getElementById('monthModalTitle');
+  if (mmTitle) mmTitle.innerHTML = type==='csv' ? '<i class="fi fi-sr-stats"></i> Export CSV' : '<i class="fi fi-sr-document"></i> Monthly Report';
   setText('downloadBtn', type==='csv' ? 'DOWNLOAD CSV' : 'DOWNLOAD PDF');
   openModal('monthModal');
 }
@@ -925,7 +926,7 @@ async function saveReminder() {
   document.getElementById('notifBtn')?.classList.add('active');
   closeModal('reminderModal');
   updatePrefRows();
-  toast('✓ Reminder set for '+formatTime12hr(reminderTime));
+  toast('Reminder set for '+formatTime12hr(reminderTime));
 }
 window.saveReminder = saveReminder;
 
@@ -1031,7 +1032,7 @@ function generatePDF() {
 
   closeModal('monthModal');
   doc.save('Ndalama_'+monthName.replace(' ','_')+'.pdf');
-  toast('📄 PDF downloaded!');
+  toast('PDF downloaded!');
 }
 window.generatePDF = generatePDF;
 
@@ -1063,7 +1064,7 @@ function exportCSV() {
   a.click();
   URL.revokeObjectURL(url);
   closeModal('monthModal');
-  toast('📊 CSV downloaded!');
+  toast('CSV downloaded!');
 }
 window.exportCSV = exportCSV;
 
@@ -1081,7 +1082,7 @@ function scheduleDailyReminder() {
   window._notifTimer = setTimeout(()=>{
     const today = new Date().toISOString().split('T')[0];
     const cnt   = expenses.filter(e=>e.date===today).length;
-    new Notification('Ndalama 💰',{
+    new Notification('Ndalama',{
       body: cnt===0 ? "You haven't logged any expenses today!" : `You've logged ${cnt} expense${cnt>1?'s':''} today. Anything else?`
     });
     scheduleDailyReminder();
@@ -1101,7 +1102,7 @@ function scheduleWeeklySummary() {
     const ws       = weekStart();
     const wkExp    = expenses.filter(e=>new Date(e.date)>=ws);
     const wkTotal  = wkExp.reduce((s,e)=>s+e.amount,0);
-    new Notification('Ndalama — Weekly Summary 📊',{
+    new Notification('Ndalama — Weekly Summary',{
       body:`This week you spent ${fmt(wkTotal)} across ${wkExp.length} transaction${wkExp.length!==1?'s':''}.`
     });
     scheduleWeeklySummary();
@@ -1116,10 +1117,10 @@ function checkBudgetAlert() {
   const key   = 'ndalama_budget_alerted_'+new Date().toISOString().slice(0,7);
   if (pct>=80 && !localStorage.getItem(key)) {
     localStorage.setItem(key,'1');
-    new Notification('Ndalama ⚠️ Budget Alert',{
+    new Notification('Ndalama — Budget Alert',{
       body:`You've used ${pct.toFixed(0)}% of your ${fmt(budget)} monthly budget!`
     });
-    toast('⚠️ You\'ve reached '+pct.toFixed(0)+'% of your monthly budget!');
+    toast('You\'ve reached '+pct.toFixed(0)+'% of your monthly budget!');
   }
 }
 

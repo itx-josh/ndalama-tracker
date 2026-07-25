@@ -7,6 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+  <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -16,7 +17,7 @@
   <div class="screen active" id="screenSplash">
     <div class="splash-bg"></div>
     <div class="splash-content">
-      <div class="splash-icon">💰</div>
+      <div class="splash-icon"><i class="fi fi-sr-bank"></i></div>
       <h1 class="splash-title">Ndalama</h1>
       <p class="splash-sub">Smart Expense Tracking</p>
       <div class="splash-loader"><div class="splash-bar"></div></div>
@@ -27,7 +28,7 @@
   <div class="screen" id="screenLogin">
     <div class="auth-top-wave">
       <div class="wave-brand">
-        <span class="brand-icon">💰</span>
+        <span class="brand-icon"><i class="fi fi-sr-bank"></i></span>
         <span class="brand-name">Ndalama</span>
       </div>
     </div>
@@ -36,11 +37,11 @@
       <p class="auth-sub">Sign in to continue tracking</p>
       <div class="form-grp">
         <label>Email Address</label>
-        <div class="inp-wrap"><span class="inp-ico">✉️</span><input type="email" id="loginEmail" placeholder="your@email.com"></div>
+        <div class="inp-wrap"><span class="inp-ico"><i class="fi fi-sr-envelope"></i></span><input type="email" id="loginEmail" placeholder="your@email.com"></div>
       </div>
       <div class="form-grp">
         <label>Password</label>
-        <div class="inp-wrap"><span class="inp-ico">🔒</span><input type="password" id="loginPassword" placeholder="Your password"><button class="pw-toggle" onclick="togglePw('loginPassword',this)">👁</button></div>
+        <div class="inp-wrap"><span class="inp-ico"><i class="fi fi-sr-lock"></i></span><input type="password" id="loginPassword" placeholder="Your password"><button class="pw-toggle" onclick="togglePw('loginPassword',this)"><i class="fi fi-sr-eye"></i></button></div>
       </div>
       <div style="text-align:right;margin-bottom:1.2rem;"><a class="link-btn" onclick="showScreen('screenForgot')">Forgot Password?</a></div>
       <button class="btn-primary" onclick="handleLogin()">SIGN IN</button>
@@ -54,14 +55,14 @@
   <div class="screen" id="screenForgot">
     <div class="auth-top-wave">
       <button class="back-btn" onclick="showScreen('screenLogin')">← Back</button>
-      <div class="wave-brand"><span class="brand-icon">💰</span><span class="brand-name">Ndalama</span></div>
+      <div class="wave-brand"><span class="brand-icon"><i class="fi fi-sr-bank"></i></span><span class="brand-name">Ndalama</span></div>
     </div>
     <div class="auth-container">
       <h2 class="auth-title">Reset Password</h2>
       <p class="auth-sub">We'll send a reset link to your email</p>
       <div class="form-grp">
         <label>Email Address</label>
-        <div class="inp-wrap"><span class="inp-ico">✉️</span><input type="email" id="forgotEmail" placeholder="your@email.com"></div>
+        <div class="inp-wrap"><span class="inp-ico"><i class="fi fi-sr-envelope"></i></span><input type="email" id="forgotEmail" placeholder="your@email.com"></div>
       </div>
       <button class="btn-primary" onclick="handleForgotPassword()">SEND RESET LINK</button>
       <p class="auth-foot">Remember it? <a class="link-btn" onclick="showScreen('screenLogin')">Sign In</a></p>
@@ -79,11 +80,11 @@
       <p class="auth-sub">Step 1 of 2 — Set your credentials</p>
       <div class="form-grp">
         <label>Email Address</label>
-        <div class="inp-wrap"><span class="inp-ico">✉️</span><input type="email" id="su1Email" placeholder="your@email.com"></div>
+        <div class="inp-wrap"><span class="inp-ico"><i class="fi fi-sr-envelope"></i></span><input type="email" id="su1Email" placeholder="your@email.com"></div>
       </div>
       <div class="form-grp">
         <label>Password</label>
-        <div class="inp-wrap"><span class="inp-ico">🔒</span><input type="password" id="su1Password" placeholder="Create strong password" oninput="checkStrength(this.value)"><button class="pw-toggle" onclick="togglePw('su1Password',this)">👁</button></div>
+        <div class="inp-wrap"><span class="inp-ico"><i class="fi fi-sr-lock"></i></span><input type="password" id="su1Password" placeholder="Create strong password" oninput="checkStrength(this.value)"><button class="pw-toggle" onclick="togglePw('su1Password',this)"><i class="fi fi-sr-eye"></i></button></div>
         <div class="strength-track"><div class="strength-fill" id="strengthFill"></div></div>
         <p class="strength-txt" id="strengthTxt"></p>
         <ul class="pw-rules" id="pwRules">
@@ -96,7 +97,7 @@
       </div>
       <div class="form-grp">
         <label>Confirm Password</label>
-        <div class="inp-wrap"><span class="inp-ico">🔒</span><input type="password" id="su1Confirm" placeholder="Re-enter your password"><button class="pw-toggle" onclick="togglePw('su1Confirm',this)">👁</button></div>
+        <div class="inp-wrap"><span class="inp-ico"><i class="fi fi-sr-lock"></i></span><input type="password" id="su1Confirm" placeholder="Re-enter your password"><button class="pw-toggle" onclick="togglePw('su1Confirm',this)"><i class="fi fi-sr-eye"></i></button></div>
       </div>
       <button class="btn-primary" onclick="handleSignup1()">CONTINUE →</button>
       <div class="or-div"><span>OR</span></div>
@@ -113,19 +114,19 @@
       <p class="auth-sub">Step 2 of 2 — Almost there!</p>
       <div class="photo-zone" onclick="document.getElementById('photoFileInput').click()">
         <div class="photo-circle" id="photoCircle">
-          <span id="photoPlaceholder">📷<br><small>Add Photo<br>(optional)</small></span>
+          <span id="photoPlaceholder"><i class="fi fi-sr-camera"></i><br><small>Add Photo<br>(optional)</small></span>
           <img id="photoPreviewImg" src="" alt="" style="display:none;width:100%;height:100%;object-fit:cover;border-radius:50%;">
         </div>
       </div>
       <input type="file" id="photoFileInput" accept="image/*" style="display:none" onchange="previewPhoto(this)">
-      <div class="form-grp"><label>Full Name</label><div class="inp-wrap"><span class="inp-ico">👤</span><input type="text" id="su2Name" placeholder="e.g. Alexander Banda"></div></div>
-      <div class="form-grp"><label>Nickname <span class="lbl-note">(displayed in app)</span></label><div class="inp-wrap"><span class="inp-ico">😊</span><input type="text" id="su2Nick" placeholder="e.g. xander"></div></div>
-      <div class="form-grp"><label>Phone Number</label><div class="inp-wrap"><span class="inp-ico">📱</span><input type="tel" id="su2Phone" placeholder="+265 888 000 000"></div></div>
-      <div class="form-grp"><label>Date of Birth</label><div class="inp-wrap"><span class="inp-ico">🎂</span><input type="date" id="su2DOB"></div></div>
+      <div class="form-grp"><label>Full Name</label><div class="inp-wrap"><span class="inp-ico"><i class="fi fi-sr-user"></i></span><input type="text" id="su2Name" placeholder="e.g. Alexander Banda"></div></div>
+      <div class="form-grp"><label>Nickname <span class="lbl-note">(displayed in app)</span></label><div class="inp-wrap"><span class="inp-ico"><i class="fi fi-sr-id-badge"></i></span><input type="text" id="su2Nick" placeholder="e.g. xander"></div></div>
+      <div class="form-grp"><label>Phone Number</label><div class="inp-wrap"><span class="inp-ico"><i class="fi fi-sr-smartphone"></i></span><input type="tel" id="su2Phone" placeholder="+265 888 000 000"></div></div>
+      <div class="form-grp"><label>Date of Birth</label><div class="inp-wrap"><span class="inp-ico"><i class="fi fi-sr-calendar"></i></span><input type="date" id="su2DOB"></div></div>
       <div class="form-grp"><label>Gender</label>
         <div class="gender-row"><button class="gender-btn active" id="gBtn-Male" onclick="pickGender('Male')">♂ Male</button><button class="gender-btn" id="gBtn-Female" onclick="pickGender('Female')">♀ Female</button></div>
       </div>
-      <button class="btn-primary" onclick="handleSignup2()">CREATE MY ACCOUNT 🎉</button>
+      <button class="btn-primary" onclick="handleSignup2()">CREATE MY ACCOUNT <i class="fi fi-sr-crown"></i></button>
     </div>
   </div>
 
@@ -137,8 +138,8 @@
       <div class="tb-left" onclick="showView('viewProfile')">
         <div class="tb-avatar-wrap">
           <img id="tbAvatar" src="" alt="" class="tb-avatar" style="display:none">
-          <div id="tbAvatarFb" class="tb-avatar-fb">👤</div>
-          <div class="streak-badge" id="streakBadge" title="Day streak" style="display:none">🔥<span id="streakCount">0</span></div>
+          <div id="tbAvatarFb" class="tb-avatar-fb"><i class="fi fi-sr-user"></i></div>
+          <div class="streak-badge" id="streakBadge" title="Day streak" style="display:none"><i class="fi fi-sr-flame"></i><span id="streakCount">0</span></div>
         </div>
         <div>
           <div class="tb-greeting" id="tbGreeting">Hi there!</div>
@@ -146,7 +147,7 @@
         </div>
       </div>
       <div class="tb-right">
-        <button class="tb-icon-btn" id="notifBtn" onclick="openReminderModal()" title="Set reminder">🔔</button>
+        <button class="tb-icon-btn" id="notifBtn" onclick="openReminderModal()" title="Set reminder"><i class="fi fi-sr-bell"></i></button>
       </div>
     </header>
 
@@ -164,7 +165,7 @@
             </div>
             <div class="hero-income-badge" onclick="openIncomeModal()">
               <div class="hib-lbl">Monthly Income</div>
-              <div class="hib-val" id="heroIncome">Set income ✏️</div>
+              <div class="hib-val" id="heroIncome">Set income <i class="fi fi-sr-pencil"></i></div>
             </div>
           </div>
           <div class="budget-block">
@@ -172,28 +173,28 @@
             <div class="budget-track"><div class="budget-fill" id="budgetFill" style="width:0%"></div></div>
             <div class="budget-row" style="margin-top:0.3rem;">
               <span id="budgetSpentLbl" style="font-size:0.8rem;opacity:0.85;">Set a budget to track progress</span>
-              <a class="budget-set-link" onclick="openBudgetModal()">✏️ Set Budget</a>
+              <a class="budget-set-link" onclick="openBudgetModal()"><i class="fi fi-sr-pencil"></i> Set Budget</a>
             </div>
           </div>
         </div>
 
         <!-- Stats -->
         <div class="stat-row">
-          <div class="s-card"><div class="s-ico">📅</div><div class="s-val" id="sToday">MK 0</div><div class="s-lbl">Today</div></div>
-          <div class="s-card"><div class="s-ico">📊</div><div class="s-val" id="sWeek">MK 0</div><div class="s-lbl">This Week</div></div>
-          <div class="s-card"><div class="s-ico">📆</div><div class="s-val" id="sMonth">MK 0</div><div class="s-lbl">Month</div></div>
+          <div class="s-card"><div class="s-ico"><i class="fi fi-sr-calendar"></i></div><div class="s-val" id="sToday">MK 0</div><div class="s-lbl">Today</div></div>
+          <div class="s-card"><div class="s-ico"><i class="fi fi-sr-stats"></i></div><div class="s-val" id="sWeek">MK 0</div><div class="s-lbl">This Week</div></div>
+          <div class="s-card"><div class="s-ico"><i class="fi fi-sr-grid"></i></div><div class="s-val" id="sMonth">MK 0</div><div class="s-lbl">Month</div></div>
         </div>
 
         <!-- Insight Cards -->
         <div class="insight-row">
           <div class="insight-card">
-            <div class="ic-ico">🏆</div>
+            <div class="ic-ico"><i class="fi fi-sr-trophy"></i></div>
             <div class="ic-lbl">Biggest Expense</div>
             <div class="ic-val" id="icBiggest">—</div>
             <div class="ic-sub" id="icBiggestCat">—</div>
           </div>
           <div class="insight-card">
-            <div class="ic-ico">📐</div>
+            <div class="ic-ico"><i class="fi fi-sr-scale"></i></div>
             <div class="ic-lbl">Daily Average</div>
             <div class="ic-val" id="icAvgDay">—</div>
             <div class="ic-sub" id="icAvgSub">this month</div>
@@ -201,7 +202,7 @@
         </div>
 
         <!-- Savings Goals -->
-        <div class="sec-hdr"><span>💎 Savings Goals</span><a class="see-all" onclick="openGoalModal()">+ New Goal</a></div>
+        <div class="sec-hdr"><span><i class="fi fi-sr-diamond"></i> Savings Goals</span><a class="see-all" onclick="openGoalModal()">+ New Goal</a></div>
         <div id="goalsList"></div>
 
         <!-- Recent Transactions -->
@@ -228,7 +229,7 @@
         </div>
 
         <!-- 6-Month Trend -->
-        <div class="sec-hdr" style="margin-top:1.2rem;"><span>📈 6-Month Spending Trend</span></div>
+        <div class="sec-hdr" style="margin-top:1.2rem;"><span><i class="fi fi-sr-caret-up"></i> 6-Month Spending Trend</span></div>
         <div class="trend-card" id="trendCard">
           <div class="trend-chart" id="trendChart"></div>
           <div class="trend-labels" id="trendLabels"></div>
@@ -240,8 +241,8 @@
 
         <!-- Export buttons -->
         <div class="export-row">
-          <button class="btn-pdf" onclick="openMonthPicker('pdf')">📄 PDF Report</button>
-          <button class="btn-csv" onclick="openMonthPicker('csv')">📊 Export CSV</button>
+          <button class="btn-pdf" onclick="openMonthPicker('pdf')"><i class="fi fi-sr-document"></i> PDF Report</button>
+          <button class="btn-csv" onclick="openMonthPicker('csv')"><i class="fi fi-sr-stats"></i> Export CSV</button>
         </div>
       </div>
 
@@ -250,7 +251,7 @@
         <div class="view-hdr"><h2>All Expenses</h2><input type="date" id="histFilter" class="hist-filter" onchange="renderHistory()"></div>
         <!-- Search Bar -->
         <div class="search-wrap">
-          <span class="search-ico">🔍</span>
+          <span class="search-ico"><i class="fi fi-sr-search"></i></span>
           <input type="text" id="searchInput" class="search-inp" placeholder="Search by category or description..." oninput="renderHistory()">
           <button class="search-clear" onclick="clearSearch()" id="searchClearBtn" style="display:none">✕</button>
         </div>
@@ -262,8 +263,8 @@
         <div class="profile-hero">
           <div class="prof-ava-wrap">
             <img id="profAvatar" src="" alt="" style="display:none">
-            <div id="profAvaFb" class="prof-ava-fb">👤</div>
-            <button class="change-photo" onclick="document.getElementById('profPhotoInput').click()">📷</button>
+            <div id="profAvaFb" class="prof-ava-fb"><i class="fi fi-sr-user"></i></div>
+            <button class="change-photo" onclick="document.getElementById('profPhotoInput').click()"><i class="fi fi-sr-camera"></i></button>
             <input type="file" id="profPhotoInput" accept="image/*" style="display:none" onchange="updateProfilePhoto(this)">
           </div>
           <h2 id="profName">—</h2>
@@ -273,25 +274,25 @@
 
         <div class="prof-section">
           <div class="prof-sec-title">Personal Information</div>
-          <div class="prof-row" onclick="editProfileField('nickname','Nickname')"><span class="pr-ico">😊</span><div class="pr-info"><div class="pr-lbl">Nickname</div><div class="pr-val" id="pr-nickname">—</div></div><span class="pr-arr">›</span></div>
-          <div class="prof-row" onclick="editProfileField('phone','Phone Number')"><span class="pr-ico">📱</span><div class="pr-info"><div class="pr-lbl">Phone</div><div class="pr-val" id="pr-phone">—</div></div><span class="pr-arr">›</span></div>
-          <div class="prof-row"><span class="pr-ico">🎂</span><div class="pr-info"><div class="pr-lbl">Date of Birth</div><div class="pr-val" id="pr-dob">—</div></div></div>
-          <div class="prof-row"><span class="pr-ico">⚧</span><div class="pr-info"><div class="pr-lbl">Gender</div><div class="pr-val" id="pr-gender">—</div></div></div>
+          <div class="prof-row" onclick="editProfileField('nickname','Nickname')"><span class="pr-ico"><i class="fi fi-sr-id-badge"></i></span><div class="pr-info"><div class="pr-lbl">Nickname</div><div class="pr-val" id="pr-nickname">—</div></div><span class="pr-arr">›</span></div>
+          <div class="prof-row" onclick="editProfileField('phone','Phone Number')"><span class="pr-ico"><i class="fi fi-sr-smartphone"></i></span><div class="pr-info"><div class="pr-lbl">Phone</div><div class="pr-val" id="pr-phone">—</div></div><span class="pr-arr">›</span></div>
+          <div class="prof-row"><span class="pr-ico"><i class="fi fi-sr-calendar"></i></span><div class="pr-info"><div class="pr-lbl">Date of Birth</div><div class="pr-val" id="pr-dob">—</div></div></div>
+          <div class="prof-row"><span class="pr-ico"><i class="fi fi-sr-user"></i></span><div class="pr-info"><div class="pr-lbl">Gender</div><div class="pr-val" id="pr-gender">—</div></div></div>
         </div>
 
         <div class="prof-section">
           <div class="prof-sec-title">Financial Settings</div>
-          <div class="prof-row" onclick="openIncomeModal()"><span class="pr-ico">💵</span><div class="pr-info"><div class="pr-lbl">Monthly Income</div><div class="pr-val" id="pr-income">Not set</div></div><span class="pr-arr">›</span></div>
-          <div class="prof-row" onclick="openBudgetModal()"><span class="pr-ico">💰</span><div class="pr-info"><div class="pr-lbl">Monthly Budget</div><div class="pr-val" id="pr-budget">Not set</div></div><span class="pr-arr">›</span></div>
-          <div class="prof-row" onclick="openCurrencyModal()"><span class="pr-ico">🌍</span><div class="pr-info"><div class="pr-lbl">Currency</div><div class="pr-val" id="pr-currency">MWK</div></div><span class="pr-arr">›</span></div>
+          <div class="prof-row" onclick="openIncomeModal()"><span class="pr-ico"><i class="fi fi-sr-earnings"></i></span><div class="pr-info"><div class="pr-lbl">Monthly Income</div><div class="pr-val" id="pr-income">Not set</div></div><span class="pr-arr">›</span></div>
+          <div class="prof-row" onclick="openBudgetModal()"><span class="pr-ico"><i class="fi fi-sr-dollar"></i></span><div class="pr-info"><div class="pr-lbl">Monthly Budget</div><div class="pr-val" id="pr-budget">Not set</div></div><span class="pr-arr">›</span></div>
+          <div class="prof-row" onclick="openCurrencyModal()"><span class="pr-ico"><i class="fi fi-sr-globe"></i></span><div class="pr-info"><div class="pr-lbl">Currency</div><div class="pr-val" id="pr-currency">MWK</div></div><span class="pr-arr">›</span></div>
         </div>
 
         <div class="prof-section">
           <div class="prof-sec-title">Preferences</div>
-          <div class="prof-row" onclick="openReminderModal()"><span class="pr-ico">🔔</span><div class="pr-info"><div class="pr-lbl">Daily Reminder</div><div class="pr-val" id="pr-reminder">Not set</div></div><span class="pr-arr">›</span></div>
+          <div class="prof-row" onclick="openReminderModal()"><span class="pr-ico"><i class="fi fi-sr-bell"></i></span><div class="pr-info"><div class="pr-lbl">Daily Reminder</div><div class="pr-val" id="pr-reminder">Not set</div></div><span class="pr-arr">›</span></div>
           <!-- Dark Mode Toggle -->
           <div class="prof-row">
-            <span class="pr-ico">🌙</span>
+            <span class="pr-ico"><i class="fi fi-sr-star"></i></span>
             <div class="pr-info"><div class="pr-lbl">Dark Mode</div><div class="pr-val">Toggle theme</div></div>
             <label class="toggle-switch">
               <input type="checkbox" id="darkModeToggle" onchange="toggleDarkMode(this.checked)">
@@ -302,8 +303,8 @@
 
         <div class="prof-section">
           <div class="prof-sec-title">Account</div>
-          <div class="prof-row" onclick="handleChangePassword()"><span class="pr-ico">🔑</span><div class="pr-info"><div class="pr-lbl">Change Password</div><div class="pr-val">Send reset link to email</div></div><span class="pr-arr">›</span></div>
-          <div class="prof-row danger" onclick="handleLogout()"><span class="pr-ico">🚪</span><div class="pr-info"><div class="pr-lbl" style="color:#e53e3e;">Sign Out</div></div><span class="pr-arr">›</span></div>
+          <div class="prof-row" onclick="handleChangePassword()"><span class="pr-ico"><i class="fi fi-sr-key"></i></span><div class="pr-info"><div class="pr-lbl">Change Password</div><div class="pr-val">Send reset link to email</div></div><span class="pr-arr">›</span></div>
+          <div class="prof-row danger" onclick="handleLogout()"><span class="pr-ico"><i class="fi fi-sr-sign-out"></i></span><div class="pr-info"><div class="pr-lbl" style="color:#e53e3e;">Sign Out</div></div><span class="pr-arr">›</span></div>
         </div>
       </div>
 
@@ -312,11 +313,11 @@
     <button class="fab" onclick="openAddModal()">+</button>
 
     <nav class="bot-nav">
-      <button class="bn-btn active" id="bn-home" onclick="showView('viewHome',this)"><span>🏠</span><small>Home</small></button>
-      <button class="bn-btn" id="bn-analysis" onclick="showView('viewAnalysis',this)"><span>📊</span><small>Analysis</small></button>
+      <button class="bn-btn active" id="bn-home" onclick="showView('viewHome',this)"><span><i class="fi fi-sr-home"></i></span><small>Home</small></button>
+      <button class="bn-btn" id="bn-analysis" onclick="showView('viewAnalysis',this)"><span><i class="fi fi-sr-stats"></i></span><small>Analysis</small></button>
       <div class="bn-spacer"></div>
-      <button class="bn-btn" id="bn-history" onclick="showView('viewHistory',this)"><span>📋</span><small>History</small></button>
-      <button class="bn-btn" id="bn-profile" onclick="showView('viewProfile',this)"><span>👤</span><small>Profile</small></button>
+      <button class="bn-btn" id="bn-history" onclick="showView('viewHistory',this)"><span><i class="fi fi-sr-list"></i></span><small>History</small></button>
+      <button class="bn-btn" id="bn-profile" onclick="showView('viewProfile',this)"><span><i class="fi fi-sr-user"></i></span><small>Profile</small></button>
     </nav>
   </div>
 
@@ -333,15 +334,15 @@
     <div class="form-grp"><label>Date</label><input type="date" id="expDate" class="m-inp"></div>
     <div class="form-grp"><label>Category</label>
       <select id="expCat" class="m-inp">
-        <option value="Food & Groceries">🍽️ Food & Groceries</option>
-        <option value="Transport">🚌 Transport</option>
-        <option value="Housing & Rent">🏠 Housing & Rent</option>
-        <option value="Health & Medical">💊 Health & Medical</option>
-        <option value="Education">📚 Education</option>
-        <option value="Entertainment">🎬 Entertainment</option>
-        <option value="Clothing">👕 Clothing</option>
-        <option value="Utilities">💡 Utilities</option>
-        <option value="Other">📌 Other</option>
+        <option value="Food & Groceries">Food & Groceries</option>
+        <option value="Transport">Transport</option>
+        <option value="Housing & Rent">Housing & Rent</option>
+        <option value="Health & Medical">Health & Medical</option>
+        <option value="Education">Education</option>
+        <option value="Entertainment">Entertainment</option>
+        <option value="Clothing">Clothing</option>
+        <option value="Utilities">Utilities</option>
+        <option value="Other">Other</option>
       </select>
     </div>
     <div class="form-grp"><label>Description <small>(optional)</small></label><input type="text" id="expDesc" class="m-inp" placeholder="e.g. Lunch at Hungry Lion"></div>
@@ -356,7 +357,7 @@
 <div class="modal-ov" id="incomeModal">
   <div class="modal-sheet" style="padding-bottom:2rem;">
     <div class="sheet-handle"></div>
-    <div class="sheet-hdr"><h3>💵 Monthly Income</h3><button onclick="closeModal('incomeModal')">Cancel</button></div>
+    <div class="sheet-hdr"><h3><i class="fi fi-sr-earnings"></i> Monthly Income</h3><button onclick="closeModal('incomeModal')">Cancel</button></div>
     <p class="modal-desc">Enter your fixed monthly income. This will be used to calculate your available balance.</p>
     <div class="form-grp"><label>Income Amount</label>
       <div class="amt-wrap"><span id="incCurrSymbol">MK</span><input type="number" id="incomeAmt" class="m-inp" placeholder="e.g. 500000" min="0"></div>
@@ -369,7 +370,7 @@
 <div class="modal-ov" id="goalModal">
   <div class="modal-sheet" style="padding-bottom:2rem;">
     <div class="sheet-handle"></div>
-    <div class="sheet-hdr"><h3>💎 New Savings Goal</h3><button onclick="closeModal('goalModal')">Cancel</button></div>
+    <div class="sheet-hdr"><h3><i class="fi fi-sr-diamond"></i> New Savings Goal</h3><button onclick="closeModal('goalModal')">Cancel</button></div>
     <div class="form-grp"><label>Goal Name</label><input type="text" id="goalName" class="m-inp" placeholder="e.g. New Phone, Holiday Trip"></div>
     <div class="form-grp"><label>Target Amount</label>
       <div class="amt-wrap"><span id="goalCurrSymbol">MK</span><input type="number" id="goalTarget" class="m-inp" placeholder="e.g. 150000" min="0"></div>
@@ -408,7 +409,7 @@
 <div class="modal-ov" id="reminderModal">
   <div class="modal-sheet" style="padding-bottom:2rem;">
     <div class="sheet-handle"></div>
-    <div class="sheet-hdr"><h3>🔔 Daily Reminder</h3><button onclick="closeModal('reminderModal')">Cancel</button></div>
+    <div class="sheet-hdr"><h3><i class="fi fi-sr-bell"></i> Daily Reminder</h3><button onclick="closeModal('reminderModal')">Cancel</button></div>
     <p class="modal-desc">Choose what time you want to be reminded to log your expenses.</p>
     <div class="form-grp"><label>Reminder Time</label><input type="time" id="reminderTime" class="m-inp" value="18:00"></div>
     <div class="notif-status" id="notifStatus"></div>
@@ -420,7 +421,7 @@
 <div class="modal-ov" id="budgetModal">
   <div class="modal-sheet" style="padding-bottom:2rem;">
     <div class="sheet-handle"></div>
-    <div class="sheet-hdr"><h3>💰 Monthly Budget</h3><button onclick="closeModal('budgetModal')">Cancel</button></div>
+    <div class="sheet-hdr"><h3><i class="fi fi-sr-dollar"></i> Monthly Budget</h3><button onclick="closeModal('budgetModal')">Cancel</button></div>
     <div class="form-grp"><label>Budget Amount</label>
       <div class="amt-wrap"><span id="budCurrSymbol">MK</span><input type="number" id="budgetAmt" class="m-inp" placeholder="e.g. 200000" min="0"></div>
     </div>
@@ -432,7 +433,7 @@
 <div class="modal-ov" id="currencyModal">
   <div class="modal-sheet" style="padding-bottom:2rem;">
     <div class="sheet-handle"></div>
-    <div class="sheet-hdr"><h3>🌍 Select Currency</h3><button onclick="closeModal('currencyModal')">Cancel</button></div>
+    <div class="sheet-hdr"><h3><i class="fi fi-sr-globe"></i> Select Currency</h3><button onclick="closeModal('currencyModal')">Cancel</button></div>
     <div id="currencyList" class="currency-list"></div>
   </div>
 </div>
@@ -441,7 +442,7 @@
 <div class="modal-ov" id="monthModal">
   <div class="modal-sheet" style="padding-bottom:2rem;">
     <div class="sheet-handle"></div>
-    <div class="sheet-hdr"><h3 id="monthModalTitle">📄 Monthly Report</h3><button onclick="closeModal('monthModal')">Cancel</button></div>
+    <div class="sheet-hdr"><h3 id="monthModalTitle"><i class="fi fi-sr-document"></i> Monthly Report</h3><button onclick="closeModal('monthModal')">Cancel</button></div>
     <div class="form-grp"><label>Select Month</label><input type="month" id="reportMonth" class="m-inp"></div>
     <button class="btn-primary" id="downloadBtn" onclick="doExport()">DOWNLOAD</button>
   </div>
@@ -451,7 +452,7 @@
 <div class="modal-ov" id="congratsModal">
   <div class="modal-sheet" style="padding-bottom:2rem;text-align:center;">
     <div class="sheet-handle"></div>
-    <div style="font-size:4rem;margin:1rem 0;">🎉</div>
+    <div style="font-size:4rem;margin:1rem 0;" class="congrats-ico"><i class="fi fi-sr-crown"></i></div>
     <h3 style="font-size:1.4rem;font-weight:800;margin-bottom:0.5rem;">Goal Reached!</h3>
     <p id="congratsText" class="modal-desc" style="text-align:center;"></p>
     <button class="btn-primary" onclick="closeModal('congratsModal')">AWESOME!</button>

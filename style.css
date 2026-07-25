@@ -404,6 +404,78 @@ input:checked + .toggle-slider::before { transform:translateX(20px); }
 .toast { position:fixed; bottom:80px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--ink); color:white; padding:0.75rem 1.4rem; border-radius:24px; font-size:0.88rem; font-weight:600; opacity:0; transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1); z-index:500; white-space:nowrap; max-width:90vw; text-align:center; pointer-events:none; box-shadow:0 4px 20px rgba(0,0,0,0.25); }
 .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
 
+/* ══════════════════════════════════════════════════
+   FLATICON UICONS (solid) — replaces emoji icons
+   Icons inherit `color` by default so they flip
+   automatically between light/dark theme along with
+   the rest of the UI (via the --ink / --teal vars).
+   ══════════════════════════════════════════════════ */
+.fi {
+  display: inline-block;
+  line-height: 1;
+  vertical-align: middle;
+  color: inherit;
+}
+
+/* Icons on solid/gradient brand backgrounds → always white */
+.splash-icon .fi,
+.brand-icon .fi,
+.change-photo .fi,
+.prof-ava-fb .fi,
+.congrats-ico .fi { color: white; }
+
+.splash-icon { font-size: 4rem; display:flex; align-items:center; justify-content:center; }
+.brand-icon  { display:inline-flex; align-items:center; }
+.change-photo { color: var(--teal); }
+
+/* Form input / auth icons */
+.inp-ico .fi   { color: var(--gray); font-size: 1rem; }
+.pw-toggle .fi { color: var(--ink); font-size: 1rem; }
+.photo-circle .fi { font-size: 1.4rem; }
+
+/* Topbar */
+.tb-avatar-fb .fi   { color: var(--teal); font-size: 1.2rem; }
+.tb-icon-btn .fi    { color: var(--teal-dark); font-size: 1.1rem; }
+.tb-icon-btn.active .fi { color: white; }
+.streak-badge .fi   { color: var(--orange); font-size: 0.7rem; }
+
+/* Home stats & insights */
+.s-ico .fi  { color: var(--teal); font-size: 1.3rem; }
+.ic-ico .fi { color: var(--teal); font-size: 1.4rem; }
+
+/* Section headers (Savings Goals, 6-Month Trend, etc.) */
+.sec-hdr .fi { color: var(--teal); margin-right: 2px; }
+
+/* Transactions / categories */
+.tx-icon .fi { color: var(--teal-dark); font-size: 1.1rem; }
+.tc-icon .fi { color: var(--teal); font-size: 1.4rem; }
+.tx-btn .fi  { font-size: 0.85rem; }
+
+/* Goals */
+.goal-btn .fi { font-size: 0.8rem; }
+
+/* Search */
+.search-ico .fi { color: var(--gray); font-size: 1rem; }
+
+/* Empty states */
+.em-ico .fi { font-size: 2.5rem; color: var(--gray); }
+
+/* Analysis */
+.mom-icon .fi { font-size: 2rem; }
+.mom-card .mom-icon .fi { color: var(--teal); }
+
+/* Export buttons (already white text on colored bg — icon follows) */
+.btn-pdf .fi, .btn-csv .fi { font-size: 0.9rem; }
+
+/* Profile rows */
+.pr-ico .fi { color: var(--gray); font-size: 1.1rem; }
+.prof-row.danger .pr-ico .fi { color: var(--red); }
+
+/* Bottom nav — icon follows the button's own color (gray/teal) */
+.bn-btn span .fi { font-size: 1.3rem; }
+
+/* Gender picker — leave ♂ / ♀ as plain glyphs, not icon font */
+
 /* ── RESPONSIVE ──────────────────────────────── */
 @media (min-width:500px) {
   #appRoot { max-width:430px; margin:0 auto; box-shadow:0 0 60px rgba(0,0,0,0.15); }
